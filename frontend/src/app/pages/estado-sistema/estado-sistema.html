@@ -1,0 +1,279 @@
+
+
+<app-navbar></app-navbar>
+
+<main class="system-page">
+  <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">INFRAESTRUCTURA</p>
+
+      <h1>Estado del sistema</h1>
+
+      <p>
+        Supervisa la disponibilidad de los nodos y el estado actual del sistema distribuido
+        ParkSafe.
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <!-- Boton de accion: ejecuta el flujo definido en el componente TypeScript. -->
+
+      <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+      <button
+        type="button"
+        class="auto-button"
+        [class.active]="autoRefresh"
+        (click)="toggleAutoRefresh()"
+      >
+        @if (autoRefresh) {
+          ● Automático
+        } @else {
+          ○ Pausado
+        }
+      </button>
+
+      <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+      <button type="button" class="refresh-button" (click)="loadStatus()">↻ Actualizar</button>
+    </div>
+  </section>
+
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (loading) {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="loading-state">
+      <div class="loader"></div>
+
+      <p>Consultando infraestructura...</p>
+    </section>
+  } @else if (system) {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="active-node-card">
+      <div>
+        <p>NODO ACTIVO</p>
+
+        <h2>
+          {{ activeNode }}
+        </h2>
+
+        <span>
+          {{ activeNodeUrl }}
+        </span>
+      </div>
+
+      <div class="leader-badge">PRIMARY</div>
+    </section>
+
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="nodes-grid">
+      <article
+        class="node-card"
+        [class.online]="primaryStatus === 'ACTIVE'"
+        [class.offline]="primaryStatus !== 'ACTIVE'"
+      >
+        <div class="node-heading">
+          <div>
+            <p>NODO FÍSICO</p>
+
+            <h2>PRIMARY</h2>
+          </div>
+
+          <span class="status-badge" [class.status-online]="primaryStatus === 'ACTIVE'">
+            {{ primaryStatus }}
+          </span>
+        </div>
+
+        <div class="node-info">
+          <div>
+            <span> Dirección </span>
+
+            <strong> http://localhost:3003 </strong>
+          </div>
+
+          <div>
+            <span> Rol actual </span>
+
+            <strong>
+              {{ primaryRole }}
+            </strong>
+          </div>
+
+          <div>
+            <span> Fallos consecutivos </span>
+
+            <strong>
+              {{ system.heartbeat.primary.consecutiveFailures }}
+            </strong>
+          </div>
+
+          <div>
+            <span> Última comprobación </span>
+
+            <strong>
+              {{ system.heartbeat.primary.lastCheck || '-' }}
+            </strong>
+          </div>
+        </div>
+      </article>
+
+      <article
+        class="node-card"
+        [class.online]="backupStatus === 'ACTIVE'"
+        [class.offline]="backupStatus !== 'ACTIVE'"
+      >
+        <div class="node-heading">
+          <div>
+            <p>NODO FÍSICO</p>
+
+            <h2>BACKUP</h2>
+          </div>
+
+          <span class="status-badge" [class.status-online]="backupStatus === 'ACTIVE'">
+            {{ backupStatus }}
+          </span>
+        </div>
+
+        <div class="node-info">
+          <div>
+            <span> Dirección </span>
+
+            <strong> http://localhost:3004 </strong>
+          </div>
+
+          <div>
+            <span> Rol actual </span>
+
+            <strong>
+              {{ backupRole }}
+            </strong>
+          </div>
+
+          <div>
+            <span> Fallos consecutivos </span>
+
+            <strong>
+              {{ system.heartbeat.backup.consecutiveFailures }}
+            </strong>
+          </div>
+
+          <div>
+            <span> Última comprobación </span>
+
+            <strong>
+              {{ system.heartbeat.backup.lastCheck || '-' }}
+            </strong>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="infrastructure-grid">
+      <article class="info-card">
+        <p class="section-eyebrow">API GATEWAY</p>
+
+        <h3>Gateway ParkSafe</h3>
+
+        <div class="service-status">
+          <span class="status-dot online"></span>
+
+          <div>
+            <strong> ACTIVE </strong>
+
+            <small> http://localhost:8080 </small>
+          </div>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <p class="section-eyebrow">HEARTBEAT</p>
+
+        <h3>Monitoreo automático</h3>
+
+        <div class="service-status">
+          <span class="status-dot" [class.online]="system.heartbeat.running"></span>
+
+          <div>
+            <strong>
+              @if (system.heartbeat.running) {
+                ACTIVO
+              } @else {
+                DETENIDO
+              }
+            </strong>
+
+            <small> Comprobación cada 3 segundos </small>
+          </div>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <p class="section-eyebrow">FAILOVER</p>
+
+        <h3>Conmutación automática</h3>
+
+        <div class="service-status">
+          <span class="status-dot" [class.online]="failoverExecuted"></span>
+
+          <div>
+            <strong>
+              @if (failoverExecuted) {
+                EJECUTADO
+              } @else {
+                SIN EJECUTAR
+              }
+            </strong>
+
+            <small>
+              {{ system.nodeManager.failoverExecutedAt || 'Sin failover reciente' }}
+            </small>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="architecture-card">
+      <div class="section-heading">
+        <p class="section-eyebrow">ARQUITECTURA ACTUAL</p>
+
+        <h2>Flujo de solicitudes</h2>
+      </div>
+
+      <div class="architecture">
+        <div class="architecture-node client">
+          Angular
+          <span>:4200</span>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="architecture-node gateway">
+          API Gateway
+          <span>:8080</span>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="architecture-node leader">
+          {{ activeNode }}
+          <span>
+            {{ activeNode === 'PRIMARY' ? ':3003' : ':3004' }}
+          </span>
+        </div>
+
+        <div class="arrow">⇄</div>
+
+        <div class="architecture-node database">
+          MySQL
+          <span> Nodo activo </span>
+        </div>
+      </div>
+    </section>
+  }
+</main>

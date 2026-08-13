@@ -1,0 +1,434 @@
+
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .reservations-page: define presentacion del bloque .reservations-page dentro de la pantalla mis reservas. */
+.reservations-page {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding: 46px 0 75px;
+}
+/* .page-header: define presentacion del bloque .page-header dentro de la pantalla mis reservas. */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+/* .section-eyebrow: encabezado/rotulo que separa secciones y mejora lectura de mis reservas. */
+.section-eyebrow {
+  margin: 0 0 8px;
+
+  color: #159b91;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  letter-spacing: 1.2px;
+}
+
+/* .page-header h1: define presentacion del bloque .page-header h1 dentro de la pantalla mis reservas. */
+.page-header h1 {
+  margin: 0;
+
+  color: #172b43;
+
+  font-size: 40px;
+
+  letter-spacing: -1px;
+}
+
+/* .page-header > div > p:last-child: define presentacion del bloque .page-header > div > p:last-child dentro de la pantalla mis reservas. */
+.page-header > div > p:last-child {
+  max-width: 650px;
+
+  margin: 10px 0 0;
+
+  color: #778292;
+
+  line-height: 1.6;
+}
+/* .refresh-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.refresh-button {
+  padding: 11px 15px;
+
+  border: 1px solid #dae1e8;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #35495f;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+/* .stats-grid: grilla que ordena elementos repetidos de mis reservas, como tarjetas, espacios o datos. */
+.stats-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 17px;
+
+  margin-bottom: 24px;
+}
+/* .stat-card: tarjeta que agrupa informacion relacionada para lectura rapida en mis reservas. */
+.stat-card {
+  padding: 20px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 14px;
+
+  background: white;
+}
+
+/* .stat-card span: tarjeta que agrupa informacion relacionada para lectura rapida en mis reservas. */
+.stat-card span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #8792a0;
+
+  font-size: 11px;
+}
+
+/* .stat-card strong: tarjeta que agrupa informacion relacionada para lectura rapida en mis reservas. */
+.stat-card strong {
+  color: #183149;
+
+  font-size: 27px;
+}
+/* .reservations-section: encabezado/rotulo que separa secciones y mejora lectura de mis reservas. */
+.reservations-section {
+  padding: 27px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 16px;
+
+  background: white;
+}
+/* .section-header: encabezado/rotulo que separa secciones y mejora lectura de mis reservas. */
+.section-header {
+  margin-bottom: 24px;
+}
+
+/* .section-header h2: encabezado/rotulo que separa secciones y mejora lectura de mis reservas. */
+.section-header h2 {
+  margin: 0;
+
+  color: #1e344c;
+
+  font-size: 21px;
+}
+/* .reservations-grid: grilla que ordena elementos repetidos de mis reservas, como tarjetas, espacios o datos. */
+.reservations-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+/* .reservation-card: tarjeta que agrupa informacion relacionada para lectura rapida en mis reservas. */
+.reservation-card {
+  padding: 21px;
+
+  border: 1px solid #e1e6eb;
+
+  border-radius: 14px;
+
+  background: linear-gradient(180deg, #ffffff, #fbfcfd);
+}
+
+/* .card-header: tarjeta que agrupa informacion relacionada para lectura rapida en mis reservas. */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding-bottom: 17px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+/* .reservation-code: define presentacion del bloque .reservation-code dentro de la pantalla mis reservas. */
+.reservation-code {
+  margin: 0 0 6px;
+
+  color: #8793a2;
+
+  font-size: 9px;
+  font-weight: 750;
+}
+
+/* .card-header h3: tarjeta que agrupa informacion relacionada para lectura rapida en mis reservas. */
+.card-header h3 {
+  margin: 0;
+
+  color: #18324b;
+
+  font-size: 28px;
+}
+
+/* .status-badge: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status-badge {
+  padding: 6px 9px;
+
+  border-radius: 999px;
+
+  background: #edf0f3;
+  color: #657285;
+
+  font-size: 8px;
+  font-weight: 850;
+}
+
+/* .status-badge.active: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status-badge.active {
+  background: #e7f8f2;
+  color: #147b68;
+}
+
+/* .parking-name: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-name {
+  margin: 17px 0;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  background: #f6f8fa;
+}
+
+.parking-name span,
+/* .parking-name strong: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-name strong {
+  display: block;
+}
+
+/* .parking-name span: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-name span {
+  margin-bottom: 4px;
+
+  color: #929ca9;
+
+  font-size: 9px;
+}
+
+/* .parking-name strong: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-name strong {
+  color: #294059;
+
+  font-size: 13px;
+}
+
+/* .details-grid: grilla que ordena elementos repetidos de mis reservas, como tarjetas, espacios o datos. */
+.details-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+}
+
+.details-grid span,
+/* .details-grid strong: grilla que ordena elementos repetidos de mis reservas, como tarjetas, espacios o datos. */
+.details-grid strong {
+  display: block;
+}
+
+/* .details-grid span: grilla que ordena elementos repetidos de mis reservas, como tarjetas, espacios o datos. */
+.details-grid span {
+  margin-bottom: 4px;
+
+  color: #939dab;
+
+  font-size: 9px;
+}
+
+/* .details-grid strong: grilla que ordena elementos repetidos de mis reservas, como tarjetas, espacios o datos. */
+.details-grid strong {
+  color: #405269;
+
+  font-size: 11px;
+}
+
+/* .backup-node: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.backup-node {
+  color: #b17610 !important;
+}
+
+/* .operation: define presentacion del bloque .operation dentro de la pantalla mis reservas. */
+.operation {
+  margin-top: 18px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #edf0f3;
+}
+
+/* .operation span: define presentacion del bloque .operation span dentro de la pantalla mis reservas. */
+.operation span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #9ba4b0;
+
+  font-size: 8px;
+}
+
+/* .operation code: define presentacion del bloque .operation code dentro de la pantalla mis reservas. */
+.operation code {
+  display: block;
+
+  overflow: hidden;
+
+  color: #778393;
+
+  font-size: 9px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* .error-message: mensaje de error mostrado cuando validaciones o backend rechazan la operacion. */
+.error-message {
+  margin-bottom: 20px;
+
+  padding: 14px 17px;
+
+  border: 1px solid #fecaca;
+
+  border-radius: 10px;
+
+  background: #fff2f2;
+
+  color: #a62e2e;
+
+  font-size: 12px;
+}
+
+.loading-state,
+/* .empty-state: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.empty-state {
+  min-height: 340px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #778392;
+}
+
+/* .loader: circulo de carga que aparece mientras se espera respuesta del Gateway o servicios. */
+.loader {
+  width: 34px;
+  height: 34px;
+
+  margin-bottom: 15px;
+
+  border: 3px solid #dce4e9;
+
+  border-top-color: #1aa99a;
+
+  border-radius: 50%;
+
+  animation: rotate 0.7s linear infinite;
+}
+
+@keyframes rotate {
+  /* to: paso final de la animacion del loader giratorio usado durante cargas HTTP. */
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* .empty-icon: estado vacio que aparece cuando aun no hay vehiculos, reservas o datos para listar. */
+.empty-icon {
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 15px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+
+  background: #e8f7f4;
+
+  color: #16877b;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* .empty-state h3: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.empty-state h3 {
+  margin: 0 0 8px;
+
+  color: #223950;
+}
+
+/* .empty-state p: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.empty-state p {
+  margin: 0;
+
+  font-size: 12px;
+}
+
+/* Adaptacion responsiva de reservas: reduce estadisticas y lista a columnas mas simples. */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reservations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Adaptacion movil de mis reservas: prioriza lectura vertical del historial. */
+@media (max-width: 600px) {
+  .reservations-page {
+    width: calc(100% - 28px);
+    padding-top: 30px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

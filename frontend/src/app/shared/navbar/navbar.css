@@ -1,0 +1,201 @@
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .navbar: controla navegacion entre pantallas y salida de sesion. */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  width: 100%;
+
+  background: rgba(18, 37, 59, 0.98);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 5px 24px rgba(15, 30, 48, 0.12);
+}
+/* .navbar-container: controla navegacion entre pantallas y salida de sesion. */
+.navbar-container {
+  width: min(1180px, calc(100% - 40px));
+
+  min-height: 72px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+/* .brand: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: white;
+  text-decoration: none;
+}
+/* .brand-icon: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-icon {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: #47d2c0;
+  color: #13263c;
+
+  font-size: 22px;
+  font-weight: 900;
+}
+/* .brand-text: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .brand-text strong: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-text strong {
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+/* .brand-text span: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-text span {
+  margin-top: 3px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+/* .nav-links: controla navegacion entre pantallas y salida de sesion. */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* .nav-links a: controla navegacion entre pantallas y salida de sesion. */
+.nav-links a {
+  padding: 9px 11px;
+
+  border-radius: 8px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 13px;
+  font-weight: 650;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+/* .nav-links a:hover: feedback visual al pasar el cursor sobre un elemento interactivo. */
+.nav-links a:hover {
+  color: white;
+
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* .nav-links a.active: controla navegacion entre pantallas y salida de sesion. */
+.nav-links a.active {
+  color: #69dfd0;
+
+  background: rgba(71, 210, 192, 0.11);
+}
+/* .logout-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.logout-button {
+  margin-left: 8px;
+  padding: 9px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* .logout-button:hover: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+/* .menu-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.menu-button {
+  display: none;
+
+  border: 0;
+  background: transparent;
+  color: white;
+
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Adaptacion tablet de navbar: cambia enlaces horizontales por menu desplegable. */
+@media (max-width: 900px) {
+  .menu-button {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 20px 22px;
+    background: #12253b;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 13px;
+  }
+
+  .logout-button {
+    margin: 8px 0 0;
+    padding: 12px;
+  }
+}
+
+/* Adaptacion movil de navbar: reduce ancho y oculta texto secundario de marca. */
+@media (max-width: 500px) {
+  .navbar-container {
+    width: calc(100% - 28px);
+  }
+
+  .brand-text span {
+    display: none;
+  }
+}

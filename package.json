@@ -1,0 +1,21 @@
+{
+  "name": "parksafe",
+  "version": "1.0.0",
+  "description": "ParkSafe es una aplicación distribuida para la gestión y reserva de espacios de estacionamiento.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test:concurrency": "node tests/concurrency-test.js"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.19.0"
+  }
+}

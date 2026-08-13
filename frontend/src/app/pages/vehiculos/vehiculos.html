@@ -1,0 +1,242 @@
+
+
+<app-navbar></app-navbar>
+
+<main class="vehicles-page">
+  <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">MIS VEHÍCULOS</p>
+
+      <h1>Administra tus vehículos</h1>
+
+      <p class="description">
+        Registra los vehículos que utilizarás para reservar espacios en ParkSafe.
+      </p>
+    </div>
+
+    <!-- Boton de accion: ejecuta el flujo definido en el componente TypeScript. -->
+
+    <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+    <button type="button" class="primary-button" (click)="toggleForm()">
+      @if (showForm) {
+        Cancelar
+      } @else {
+        + Registrar vehículo
+      }
+    </button>
+  </section>
+
+  @if (successMessage) {
+    <div class="message success-message">
+      <div>
+        <strong> Operación realizada </strong>
+
+        <span>
+          {{ successMessage }}
+        </span>
+      </div>
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="message error-message">
+      <div>
+        <strong> Ocurrió un problema </strong>
+
+        <span>
+          {{ errorMessage }}
+        </span>
+      </div>
+    </div>
+  }
+
+  @if (showForm) {
+    <!-- Seccion de vehiculos: lista o registra patentes asociadas al usuario. -->
+    <section class="vehicle-form-card">
+      <div class="form-header">
+        <div>
+          <p class="section-eyebrow">NUEVO VEHÍCULO</p>
+
+          <h2>Registrar vehículo</h2>
+        </div>
+      </div>
+
+      <!-- Formulario conectado al componente: captura datos del usuario y dispara llamadas al Gateway. -->
+
+      <!-- Formulario especifico de esta pantalla: captura datos y el componente los enviara al Gateway como JSON. -->
+      <form (ngSubmit)="createVehicle()" #vehicleForm="ngForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="patente"> Patente * </label>
+
+            <!-- Campo de entrada enlazado al componente; su valor termina en una peticion HTTP si el formulario se envia. -->
+            <input
+              id="patente"
+              type="text"
+              name="patente"
+              [(ngModel)]="patente"
+              placeholder="Ej: ABCD12"
+              maxlength="10"
+              autocomplete="off"
+              required
+            />
+
+            <small> Se guardará automáticamente en mayúsculas. </small>
+          </div>
+
+          <div class="form-group">
+            <label for="marca"> Marca </label>
+
+            <!-- Campo de entrada enlazado al componente; su valor termina en una peticion HTTP si el formulario se envia. -->
+            <input
+              id="marca"
+              type="text"
+              name="marca"
+              [(ngModel)]="marca"
+              placeholder="Ej: Toyota"
+              maxlength="50"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="modelo"> Modelo </label>
+
+            <!-- Campo de entrada enlazado al componente; su valor termina en una peticion HTTP si el formulario se envia. -->
+            <input
+              id="modelo"
+              type="text"
+              name="modelo"
+              [(ngModel)]="modelo"
+              placeholder="Ej: Yaris"
+              maxlength="50"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="color"> Color </label>
+
+            <!-- Campo de entrada enlazado al componente; su valor termina en una peticion HTTP si el formulario se envia. -->
+            <input
+              id="color"
+              type="text"
+              name="color"
+              [(ngModel)]="color"
+              placeholder="Ej: Blanco"
+              maxlength="30"
+            />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+          <button type="button" class="secondary-button" (click)="toggleForm()" [disabled]="saving">
+            Cancelar
+          </button>
+
+          <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+          <button type="submit" class="primary-button" [disabled]="saving">
+            @if (saving) {
+              Registrando...
+            } @else {
+              Registrar vehículo
+            }
+          </button>
+        </div>
+      </form>
+    </section>
+  }
+
+  <!-- Seccion de vehiculos: lista o registra patentes asociadas al usuario. -->
+  <section class="vehicles-section">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">VEHÍCULOS REGISTRADOS</p>
+
+        <h2>Tus vehículos</h2>
+      </div>
+
+      <div class="vehicle-count">
+        {{ vehicleCount }}
+        @if (vehicleCount === 1) {
+          vehículo
+        } @else {
+          vehículos
+        }
+      </div>
+    </div>
+
+    @if (loading) {
+      <div class="loading-state">
+        <div class="loader"></div>
+
+        <p>Cargando vehículos...</p>
+      </div>
+    } @else if (vehicles.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">V</div>
+
+        <h3>Aún no tienes vehículos</h3>
+
+        <p>Registra tu primer vehículo para poder reservar un espacio.</p>
+
+        <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+        <button type="button" class="primary-button" (click)="toggleForm()">
+          Registrar vehículo
+        </button>
+      </div>
+    } @else {
+      <div class="vehicles-grid">
+        @for (vehicle of vehicles; track vehicle.id) {
+          <article class="vehicle-card">
+            <div class="vehicle-top">
+              <div class="vehicle-icon">V</div>
+
+              <span class="vehicle-status"> ACTIVO </span>
+            </div>
+
+            <div class="vehicle-main">
+              <p>PATENTE</p>
+
+              <h3>
+                {{ vehicle.patente }}
+              </h3>
+            </div>
+
+            <div class="vehicle-details">
+              <div>
+                <span> Marca </span>
+
+                <strong>
+                  {{ vehicle.marca || 'Sin especificar' }}
+                </strong>
+              </div>
+
+              <div>
+                <span> Modelo </span>
+
+                <strong>
+                  {{ vehicle.modelo || 'Sin especificar' }}
+                </strong>
+              </div>
+
+              <div>
+                <span> Color </span>
+
+                <strong>
+                  {{ vehicle.color || 'Sin especificar' }}
+                </strong>
+              </div>
+
+              <div>
+                <span> ID </span>
+
+                <strong> #{{ vehicle.id }} </strong>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </section>
+</main>

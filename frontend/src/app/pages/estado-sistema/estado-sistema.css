@@ -1,0 +1,538 @@
+
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .system-page: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.system-page {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding: 46px 0 75px;
+}
+/* .page-header: define presentacion del bloque .page-header dentro de la pantalla estado sistema. */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+/* .section-eyebrow: encabezado/rotulo que separa secciones y mejora lectura de estado sistema. */
+.section-eyebrow {
+  margin: 0 0 8px;
+
+  color: #159b91;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  letter-spacing: 1.2px;
+}
+
+/* .page-header h1: define presentacion del bloque .page-header h1 dentro de la pantalla estado sistema. */
+.page-header h1 {
+  margin: 0;
+
+  color: #172b43;
+
+  font-size: 40px;
+
+  letter-spacing: -1px;
+}
+
+/* .page-header > div > p:last-child: define presentacion del bloque .page-header > div > p:last-child dentro de la pantalla estado sistema. */
+.page-header > div > p:last-child {
+  max-width: 650px;
+
+  margin: 10px 0 0;
+
+  color: #778292;
+
+  line-height: 1.6;
+}
+/* .header-actions: define presentacion del bloque .header-actions dentro de la pantalla estado sistema. */
+.header-actions {
+  display: flex;
+  gap: 9px;
+}
+
+.refresh-button,
+/* .auto-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.auto-button {
+  padding: 11px 15px;
+
+  border: 1px solid #d8e0e7;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #3b4d61;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  cursor: pointer;
+}
+
+/* .auto-button.active: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.auto-button.active {
+  border-color: #b9e8dc;
+
+  background: #eaf8f4;
+
+  color: #167865;
+}
+/* .active-node-card: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.active-node-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+
+  padding: 27px 30px;
+
+  border-radius: 16px;
+
+  background: linear-gradient(135deg, #132b44, #18506a);
+
+  color: white;
+}
+
+/* .active-node-card p: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.active-node-card p {
+  margin: 0 0 7px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+}
+
+/* .active-node-card h2: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.active-node-card h2 {
+  margin: 0 0 5px;
+
+  color: #58ddcb;
+
+  font-size: 32px;
+}
+
+/* .active-node-card span: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.active-node-card span {
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 11px;
+}
+/* .leader-badge: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.leader-badge {
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #66dfcf;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+/* .nodes-grid: grilla que ordena elementos repetidos de estado sistema, como tarjetas, espacios o datos. */
+.nodes-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+
+  margin-bottom: 22px;
+}
+/* .node-card: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.node-card {
+  padding: 24px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 15px;
+
+  background: white;
+}
+
+/* .node-card.online: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.node-card.online {
+  border-top: 3px solid #33b995;
+}
+
+/* .node-card.offline: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.node-card.offline {
+  border-top: 3px solid #d45050;
+}
+/* .node-heading: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  margin-bottom: 22px;
+}
+
+/* .node-heading p: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-heading p {
+  margin: 0 0 5px;
+
+  color: #9aa3ae;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+/* .node-heading h2: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-heading h2 {
+  margin: 0;
+
+  color: #1a334b;
+
+  font-size: 23px;
+}
+
+/* .status-badge: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status-badge {
+  padding: 6px 9px;
+
+  border-radius: 999px;
+
+  background: #fceaea;
+
+  color: #a53636;
+
+  font-size: 8px;
+  font-weight: 850;
+}
+
+/* .status-badge.status-online: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status-badge.status-online {
+  background: #e8f8f2;
+  color: #147a66;
+}
+
+/* .node-info: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-info {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+}
+
+.node-info span,
+/* .node-info strong: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-info strong {
+  display: block;
+}
+
+/* .node-info span: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-info span {
+  margin-bottom: 4px;
+
+  color: #9aa4b0;
+
+  font-size: 9px;
+}
+
+/* .node-info strong: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.node-info strong {
+  color: #405369;
+
+  font-size: 11px;
+
+  word-break: break-word;
+}
+
+/* .infrastructure-grid: grilla que ordena elementos repetidos de estado sistema, como tarjetas, espacios o datos. */
+.infrastructure-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 22px;
+}
+
+/* .info-card: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.info-card {
+  padding: 22px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 14px;
+
+  background: white;
+}
+
+/* .info-card h3: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.info-card h3 {
+  margin: 0 0 18px;
+
+  color: #20384f;
+
+  font-size: 16px;
+}
+
+/* .service-status: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.service-status {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+/* .status-dot: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status-dot {
+  width: 10px;
+  height: 10px;
+
+  flex: 0 0 10px;
+
+  border-radius: 50%;
+
+  background: #d35151;
+}
+
+/* .status-dot.online: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status-dot.online {
+  background: #2eb990;
+
+  box-shadow: 0 0 0 4px rgba(46, 185, 144, 0.12);
+}
+
+.service-status strong,
+/* .service-status small: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.service-status small {
+  display: block;
+}
+
+/* .service-status strong: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.service-status strong {
+  margin-bottom: 4px;
+
+  color: #32485e;
+
+  font-size: 11px;
+}
+
+/* .service-status small: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.service-status small {
+  color: #97a0ab;
+
+  font-size: 9px;
+}
+
+/* .architecture-card: tarjeta que agrupa informacion relacionada para lectura rapida en estado sistema. */
+.architecture-card {
+  padding: 27px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 16px;
+
+  background: white;
+}
+
+/* .section-heading: encabezado/rotulo que separa secciones y mejora lectura de estado sistema. */
+.section-heading {
+  margin-bottom: 25px;
+}
+
+/* .section-heading h2: encabezado/rotulo que separa secciones y mejora lectura de estado sistema. */
+.section-heading h2 {
+  margin: 0;
+
+  color: #1c344c;
+
+  font-size: 20px;
+}
+
+/* .architecture: define presentacion del bloque .architecture dentro de la pantalla estado sistema. */
+.architecture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 28px 20px;
+
+  border-radius: 12px;
+
+  background: #f6f8fa;
+
+  overflow-x: auto;
+}
+
+/* .architecture-node: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.architecture-node {
+  min-width: 130px;
+
+  padding: 17px;
+
+  border: 1px solid #dbe2e8;
+
+  border-radius: 11px;
+
+  background: white;
+
+  color: #263e55;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-align: center;
+}
+
+/* .architecture-node span: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.architecture-node span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #91a0ad;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+/* .architecture-node.gateway: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.architecture-node.gateway {
+  border-color: #bde8df;
+}
+
+/* .architecture-node.leader: representa salud, rol o liderazgo de nodos dentro del sistema distribuido. */
+.architecture-node.leader {
+  border-color: #63cfc0;
+
+  background: #eaf9f6;
+
+  color: #147c6d;
+}
+
+/* .arrow: define presentacion del bloque .arrow dentro de la pantalla estado sistema. */
+.arrow {
+  color: #9ca7b2;
+
+  font-size: 19px;
+}
+
+/* .error-message: mensaje de error mostrado cuando validaciones o backend rechazan la operacion. */
+.error-message {
+  margin-bottom: 20px;
+
+  padding: 14px 17px;
+
+  border: 1px solid #fecaca;
+
+  border-radius: 10px;
+
+  background: #fff2f2;
+
+  color: #a62e2e;
+
+  font-size: 12px;
+}
+
+/* .loading-state: estado visual centrado para indicar que la pantalla aun esta consultando datos. */
+.loading-state {
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #788493;
+}
+
+/* .loader: circulo de carga que aparece mientras se espera respuesta del Gateway o servicios. */
+.loader {
+  width: 34px;
+  height: 34px;
+
+  margin-bottom: 15px;
+
+  border: 3px solid #dce4e9;
+
+  border-top-color: #1aa99a;
+
+  border-radius: 50%;
+
+  animation: rotate 0.7s linear infinite;
+}
+
+@keyframes rotate {
+  /* to: paso final de la animacion del loader giratorio usado durante cargas HTTP. */
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Adaptacion responsiva del monitor: las tarjetas de nodos bajan a una columna. */
+@media (max-width: 900px) {
+  .nodes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .infrastructure-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Adaptacion movil del estado del sistema: deja botones y detalles en formato vertical. */
+@media (max-width: 650px) {
+  .system-page {
+    width: calc(100% - 28px);
+    padding-top: 30px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1;
+  }
+
+  .node-info {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture {
+    justify-content: flex-start;
+  }
+}

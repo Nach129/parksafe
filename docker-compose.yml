@@ -1,0 +1,144 @@
+# Orquestacion local: levanta bases de datos, gateway y microservicios en una red comun.
+# Este archivo representa el despliegue distribuido usado para demostrar IPC, heartbeat, replicacion y failover.
+# Estos comentarios no cambian la configuracion efectiva de Docker Compose.
+
+# Cada servicio corre como proceso/contenedor independiente dentro de la arquitectura distribuida.
+services:
+
+  mysql-auth:
+    image: mysql:8.4
+    container_name: parksafe-mysql-auth
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: parksafe_auth
+      MYSQL_USER: parksafe
+      MYSQL_PASSWORD: parksafe123
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - parksafe_auth_data:/var/lib/mysql
+      - ./database/auth/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-proot123"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
+
+
+  mysql-primary:
+    image: mysql:8.4
+    container_name: parksafe-mysql-primary
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: parksafe_primary
+      MYSQL_USER: parksafe
+      MYSQL_PASSWORD: parksafe123
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - parksafe_primary_data:/var/lib/mysql
+      - ./database/primary/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-proot123"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
+
+
+  mysql-backup:
+    image: mysql:8.4
+    container_name: parksafe-mysql-backup
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: parksafe_backup
+      MYSQL_USER: parksafe
+      MYSQL_PASSWORD: parksafe123
+
+    ports:
+      - "3308:3306"
+
+    volumes:
+      - parksafe_backup_data:/var/lib/mysql
+      - ./database/backup/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-proot123"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
+
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: parksafe-cloudbeaver
+    restart: unless-stopped
+
+    ports:
+      - "8978:8978"
+
+    volumes:
+      - parksafe_cloudbeaver_data:/opt/cloudbeaver/workspace
+
+    depends_on:
+      mysql-auth:
+        condition: service_healthy
+
+      mysql-primary:
+        condition: service_healthy
+
+      mysql-backup:
+        condition: service_healthy
+
+
+# Volumenes persistentes para conservar datos aunque se reinicien contenedores.
+volumes:
+
+  parksafe_auth_data:
+
+  parksafe_primary_data:
+
+  parksafe_backup_data:
+
+  parksafe_cloudbeaver_data:

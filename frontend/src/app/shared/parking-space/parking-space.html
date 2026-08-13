@@ -1,0 +1,34 @@
+
+
+<!-- Boton de accion: ejecuta el flujo definido en el componente TypeScript. -->
+
+<!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+<button
+  type="button"
+  class="space-card"
+  [class.available]="space.estado === 'DISPONIBLE'"
+  [class.reserved]="space.estado === 'RESERVADO'"
+  [class.occupied]="space.estado === 'OCUPADO'"
+  [class.disabled]="space.estado === 'FUERA_DE_SERVICIO'"
+  [class.selectable]="selectable && space.estado === 'DISPONIBLE'"
+  [disabled]="!selectable || space.estado !== 'DISPONIBLE'"
+  (click)="selectSpace()"
+>
+  <div class="space-top">
+    <strong>
+      {{ space.codigo }}
+    </strong>
+
+    <span class="status">
+      {{ space.estado }}
+    </span>
+  </div>
+
+  <div class="car-symbol">P</div>
+
+  @if (space.vehiculo_id) {
+    <span class="vehicle"> Vehículo #{{ space.vehiculo_id }} </span>
+  } @else {
+    <span class="vehicle"> Sin vehículo </span>
+  }
+</button>

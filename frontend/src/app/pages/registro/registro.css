@@ -1,0 +1,488 @@
+
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+
+  min-height: 100vh;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .register-page: define presentacion del bloque .register-page dentro de la pantalla registro. */
+.register-page {
+  min-height: 100vh;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(370px, 0.9fr)
+    minmax(500px, 1.1fr);
+
+  background: #f6f8fa;
+}
+/* .brand-panel: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-panel {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: 55px;
+
+  overflow: hidden;
+
+  background: linear-gradient(145deg, #122940, #16465e);
+
+  color: white;
+}
+
+/* .brand-panel::after: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-panel::after {
+  content: '';
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -220px;
+  bottom: -150px;
+
+  border: 80px solid rgba(83, 222, 204, 0.05);
+
+  border-radius: 50%;
+}
+/* .brand-content: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-content {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+  max-width: 520px;
+
+  margin: 0 auto;
+}
+/* .brand: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 80px;
+}
+/* .brand-icon: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand-icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: #4ed8ca;
+
+  color: #123247;
+
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* .brand strong: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand strong {
+  display: block;
+
+  font-size: 18px;
+}
+
+/* .brand span: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.brand span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 8px;
+  letter-spacing: 0.4px;
+}
+/* .eyebrow: encabezado/rotulo que separa secciones y mejora lectura de registro. */
+.eyebrow {
+  margin: 0 0 9px;
+
+  color: #21aa9b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1.4px;
+}
+
+/* .brand-message .eyebrow: contenedor comun para feedback textual de la pantalla registro. */
+.brand-message .eyebrow {
+  color: #59ddce;
+}
+
+/* .brand-message h1: contenedor comun para feedback textual de la pantalla registro. */
+.brand-message h1 {
+  max-width: 470px;
+
+  margin: 0 0 19px;
+
+  font-size: clamp(35px, 4vw, 51px);
+
+  line-height: 1.08;
+
+  letter-spacing: -1.6px;
+}
+
+/* .brand-message > p:last-child: contenedor comun para feedback textual de la pantalla registro. */
+.brand-message > p:last-child {
+  max-width: 450px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+/* .features: define presentacion del bloque .features dentro de la pantalla registro. */
+.features {
+  display: grid;
+
+  gap: 14px;
+
+  margin-top: 42px;
+}
+
+/* .features > div: define presentacion del bloque .features > div dentro de la pantalla registro. */
+.features > div {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+/* .features span: define presentacion del bloque .features span dentro de la pantalla registro. */
+.features span {
+  width: 24px;
+  height: 24px;
+
+  flex: 0 0 24px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: rgba(78, 216, 202, 0.13);
+
+  color: #58dfcf;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+/* .features p: define presentacion del bloque .features p dentro de la pantalla registro. */
+.features p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: 11px;
+}
+/* .form-panel: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 55px 45px;
+}
+/* .form-container: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-container {
+  width: 100%;
+  max-width: 570px;
+}
+/* .mobile-brand: identidad visual de ParkSafe usada para reconocer la aplicacion. */
+.mobile-brand {
+  display: none;
+}
+
+/* .form-heading: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-heading {
+  margin-bottom: 28px;
+}
+
+/* .form-heading h2: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-heading h2 {
+  margin: 0 0 8px;
+
+  color: #172d45;
+
+  font-size: 32px;
+
+  letter-spacing: -0.7px;
+}
+
+/* .form-heading > p:last-child: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-heading > p:last-child {
+  margin: 0;
+
+  color: #7f8997;
+
+  font-size: 12px;
+}
+
+/* .form-group: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group {
+  margin-bottom: 17px;
+}
+
+/* .form-group label: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #405268;
+
+  font-size: 11px;
+  font-weight: 750;
+}
+
+/* .form-group input: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group input {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  border: 1px solid #d5dde5;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #1b324a;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+/* .form-group input:focus: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group input:focus {
+  border-color: #26ae9f;
+
+  box-shadow: 0 0 0 4px rgba(38, 174, 159, 0.09);
+}
+
+/* .form-group input::placeholder: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group input::placeholder {
+  color: #adb5bf;
+}
+
+/* .form-row: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-row {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+/* .show-password: define presentacion del bloque .show-password dentro de la pantalla registro. */
+.show-password {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: -2px 0 22px;
+
+  color: #788593;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+/* .show-password input: parte del formulario que captura datos antes de enviarlos como JSON. */
+.show-password input {
+  accent-color: #189e90;
+}
+
+/* .register-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.register-button {
+  width: 100%;
+
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: #17344f;
+
+  color: white;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+/* .register-button:hover:not(:disabled): boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.register-button:hover:not(:disabled) {
+  background: #214965;
+
+  transform: translateY(-1px);
+}
+
+/* .register-button:disabled: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.register-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+/* .button-loader: circulo de carga que aparece mientras se espera respuesta del Gateway o servicios. */
+.button-loader {
+  width: 15px;
+  height: 15px;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+
+  border-top-color: white;
+
+  border-radius: 50%;
+
+  animation: rotate 0.65s linear infinite;
+}
+
+@keyframes rotate {
+  /* to: paso final de la animacion del loader giratorio usado durante cargas HTTP. */
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* .message: contenedor comun para feedback textual de la pantalla registro. */
+.message {
+  margin-bottom: 20px;
+
+  padding: 13px 15px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+}
+
+/* .error-message: mensaje de error mostrado cuando validaciones o backend rechazan la operacion. */
+.error-message {
+  border: 1px solid #fecaca;
+
+  background: #fff1f1;
+
+  color: #a42f2f;
+}
+
+/* .success-message: mensaje de confirmacion despues de login, registro, vehiculo o reserva exitosa. */
+.success-message {
+  border: 1px solid #b8eadc;
+
+  background: #eaf9f5;
+
+  color: #147662;
+}
+
+/* .success-message strong: mensaje de confirmacion despues de login, registro, vehiculo o reserva exitosa. */
+.success-message strong {
+  margin-right: 5px;
+}
+
+/* .login-link: enlace de navegacion secundaria entre login, registro u otra pantalla. */
+.login-link {
+  display: flex;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 25px;
+
+  color: #8b95a2;
+
+  font-size: 11px;
+}
+
+/* .login-link a: enlace de navegacion secundaria entre login, registro u otra pantalla. */
+.login-link a {
+  color: #148d80;
+
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+/* .login-link a:hover: feedback visual al pasar el cursor sobre un elemento interactivo. */
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Adaptacion tablet del registro: oculta panel lateral y enfoca el formulario. */
+@media (max-width: 900px) {
+  .register-page {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel {
+    display: none;
+  }
+
+  .form-panel {
+    min-height: 100vh;
+    padding: 35px 25px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    color: #17344f;
+    font-size: 18px;
+  }
+}
+
+/* Adaptacion movil del registro: campos se apilan para escribir comodamente. */
+@media (max-width: 550px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-heading h2 {
+    font-size: 27px;
+  }
+}

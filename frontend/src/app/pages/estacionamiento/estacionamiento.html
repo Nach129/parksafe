@@ -1,0 +1,166 @@
+
+
+<app-navbar></app-navbar>
+
+<main class="parking-page">
+  <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">ESTACIONAMIENTO</p>
+
+      <h1>Reserva tu espacio</h1>
+
+      <p>Consulta la disponibilidad actual y selecciona uno de tus vehículos.</p>
+    </div>
+
+    <!-- Boton de accion: ejecuta el flujo definido en el componente TypeScript. -->
+
+    <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+    <button type="button" class="refresh-button" (click)="loadData()" [disabled]="loading">
+      ↻ Actualizar
+    </button>
+  </section>
+
+  @if (errorMessage) {
+    <div class="message error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (successMessage) {
+    <div class="message success-message">
+      {{ successMessage }}
+    </div>
+  }
+
+  @if (loading) {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="loading-state">
+      <div class="loader"></div>
+
+      <p>Consultando estacionamiento...</p>
+    </section>
+  } @else {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="parking-tabs">
+      @for (parking of parkings; track parking.id) {
+        <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+        <button
+          type="button"
+          class="parking-tab"
+          [class.active]="selectedParkingId === parking.id"
+          (click)="selectParking(parking.id)"
+        >
+          <strong>
+            {{ parking.nombre }}
+          </strong>
+
+          <span>
+            {{ getAvailableCount(parking.id) }}
+            disponibles
+          </span>
+        </button>
+      }
+    </section>
+
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="content-grid">
+      <article class="map-card">
+        <div class="card-heading">
+          <div>
+            <p class="section-eyebrow">MAPA</p>
+
+            <h2>
+              {{ getSelectedParking()?.nombre }}
+            </h2>
+          </div>
+
+          <div class="legend">
+            <span>
+              <i class="available-dot"></i>
+              Disponible
+            </span>
+
+            <span>
+              <i class="reserved-dot"></i>
+              Reservado
+            </span>
+
+            <span>
+              <i class="occupied-dot"></i>
+              Ocupado
+            </span>
+          </div>
+        </div>
+
+        <div class="spaces-grid">
+          @for (space of getSpacesByParking(selectedParkingId || 0); track space.id) {
+            <app-parking-space [space]="space"></app-parking-space>
+          }
+        </div>
+      </article>
+
+      <aside class="reservation-card">
+        <p class="section-eyebrow">NUEVA RESERVA</p>
+
+        <h2>Reservar espacio</h2>
+
+        <p class="reservation-description">
+          ParkSafe asignará automáticamente el primer espacio disponible de este estacionamiento.
+        </p>
+
+        <div class="selected-parking">
+          <span> Estacionamiento </span>
+
+          <strong>
+            {{ getSelectedParking()?.nombre }}
+          </strong>
+
+          <small>
+            {{ getAvailableCount(selectedParkingId || 0) }}
+            espacios disponibles
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="vehicle"> Vehículo </label>
+
+          <select id="vehicle" name="vehicle" [(ngModel)]="selectedVehicleId">
+            <option [ngValue]="null">Selecciona un vehículo</option>
+
+            @for (vehicle of vehicles; track vehicle.id) {
+              <option [ngValue]="vehicle.id">
+                {{ vehicle.patente }}
+                —
+                {{ vehicle.marca || 'Sin marca' }}
+                {{ vehicle.modelo || '' }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+        <button
+          type="button"
+          class="reserve-button"
+          (click)="reserve()"
+          [disabled]="reserving || getAvailableCount(selectedParkingId || 0) === 0"
+        >
+          @if (reserving) {
+            Reservando...
+          } @else {
+            Reservar espacio
+          }
+        </button>
+
+        <div class="info-box">
+          <strong> Asignación segura </strong>
+
+          <span>
+            El espacio se bloquea mediante una transacción para evitar reservas duplicadas.
+          </span>
+        </div>
+      </aside>
+    </section>
+  }
+</main>

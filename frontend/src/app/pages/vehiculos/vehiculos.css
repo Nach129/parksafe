@@ -1,0 +1,566 @@
+
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .vehicles-page: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicles-page {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding: 46px 0 75px;
+}
+/* .page-header: define presentacion del bloque .page-header dentro de la pantalla vehiculos. */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-bottom: 30px;
+}
+
+.eyebrow,
+/* .section-eyebrow: encabezado/rotulo que separa secciones y mejora lectura de vehiculos. */
+.section-eyebrow {
+  margin: 0 0 8px;
+
+  color: #159b91;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+}
+
+/* .page-header h1: define presentacion del bloque .page-header h1 dentro de la pantalla vehiculos. */
+.page-header h1 {
+  margin: 0;
+
+  color: #172b43;
+
+  font-size: clamp(30px, 4vw, 42px);
+
+  letter-spacing: -1.2px;
+}
+/* .description: define presentacion del bloque .description dentro de la pantalla vehiculos. */
+.description {
+  max-width: 650px;
+
+  margin: 12px 0 0;
+
+  color: #727e8f;
+
+  line-height: 1.6;
+}
+
+.primary-button,
+/* .secondary-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.secondary-button {
+  padding: 12px 18px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+}
+/* .primary-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.primary-button {
+  border: 1px solid #17344f;
+
+  background: #17344f;
+
+  color: white;
+}
+
+/* .primary-button:hover:not(:disabled): boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.primary-button:hover:not(:disabled) {
+  background: #214766;
+
+  transform: translateY(-1px);
+}
+/* .secondary-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.secondary-button {
+  border: 1px solid #d9e0e7;
+
+  background: white;
+
+  color: #536174;
+}
+
+/* .secondary-button:hover:not(:disabled): boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.secondary-button:hover:not(:disabled) {
+  background: #f4f6f8;
+}
+
+.primary-button:disabled,
+/* .secondary-button:disabled: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.secondary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+/* .message: contenedor comun para feedback textual de la pantalla vehiculos. */
+.message {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+
+  padding: 15px 18px;
+
+  border-radius: 11px;
+}
+
+.message strong,
+/* .message span: contenedor comun para feedback textual de la pantalla vehiculos. */
+.message span {
+  display: block;
+}
+
+/* .message strong: contenedor comun para feedback textual de la pantalla vehiculos. */
+.message strong {
+  margin-bottom: 4px;
+
+  font-size: 13px;
+}
+
+/* .message span: contenedor comun para feedback textual de la pantalla vehiculos. */
+.message span {
+  font-size: 12px;
+}
+/* .success-message: mensaje de confirmacion despues de login, registro, vehiculo o reserva exitosa. */
+.success-message {
+  border: 1px solid #bdebdc;
+
+  background: #edf9f5;
+
+  color: #15745f;
+}
+/* .error-message: mensaje de error mostrado cuando validaciones o backend rechazan la operacion. */
+.error-message {
+  border: 1px solid #fecaca;
+
+  background: #fff2f2;
+
+  color: #a82e2e;
+}
+
+/* .vehicle-form-card: tarjeta que agrupa informacion relacionada para lectura rapida en vehiculos. */
+.vehicle-form-card {
+  margin-bottom: 30px;
+
+  padding: 27px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 16px;
+
+  background: white;
+
+  box-shadow: 0 8px 30px rgba(25, 43, 64, 0.04);
+}
+
+/* .form-header: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-header {
+  margin-bottom: 24px;
+}
+
+/* .form-header h2: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-header h2 {
+  margin: 0;
+
+  color: #1c3148;
+
+  font-size: 21px;
+}
+
+/* .form-grid: grilla que ordena elementos repetidos de vehiculos, como tarjetas, espacios o datos. */
+.form-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+/* .form-group label: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #405268;
+
+  font-size: 12px;
+  font-weight: 750;
+}
+
+/* .form-group input: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group input {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  border: 1px solid #d7dee6;
+
+  border-radius: 9px;
+
+  background: #fff;
+
+  color: #182d44;
+
+  outline: none;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+/* .form-group input:focus: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group input:focus {
+  border-color: #24aa9e;
+
+  box-shadow: 0 0 0 4px rgba(36, 170, 158, 0.1);
+}
+
+/* .form-group small: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #99a2ae;
+
+  font-size: 10px;
+}
+
+/* .form-actions: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+/* .vehicles-section: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicles-section {
+  padding: 27px;
+
+  border: 1px solid #e1e6ec;
+
+  border-radius: 16px;
+
+  background: white;
+}
+
+/* .section-header: encabezado/rotulo que separa secciones y mejora lectura de vehiculos. */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+/* .section-header h2: encabezado/rotulo que separa secciones y mejora lectura de vehiculos. */
+.section-header h2 {
+  margin: 0;
+
+  color: #1b3149;
+
+  font-size: 21px;
+}
+
+/* .vehicle-count: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-count {
+  padding: 8px 12px;
+
+  border-radius: 999px;
+
+  background: #edf8f6;
+
+  color: #158578;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* .vehicles-grid: grilla que ordena elementos repetidos de vehiculos, como tarjetas, espacios o datos. */
+.vehicles-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+/* .vehicle-card: tarjeta que agrupa informacion relacionada para lectura rapida en vehiculos. */
+.vehicle-card {
+  padding: 20px;
+
+  border: 1px solid #e3e8ee;
+
+  border-radius: 14px;
+
+  background: linear-gradient(180deg, #ffffff, #fbfcfd);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+/* .vehicle-card:hover: feedback visual al pasar el cursor sobre un elemento interactivo. */
+.vehicle-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #cbdedb;
+
+  box-shadow: 0 10px 26px rgba(26, 48, 69, 0.07);
+}
+
+/* .vehicle-top: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+/* .vehicle-icon: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-icon {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: #e7f7f4;
+
+  color: #12887b;
+
+  font-weight: 900;
+}
+
+/* .vehicle-status: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-status {
+  padding: 6px 9px;
+
+  border-radius: 999px;
+
+  background: #eaf8f3;
+
+  color: #15836e;
+
+  font-size: 8px;
+  font-weight: 850;
+
+  letter-spacing: 0.7px;
+}
+
+/* .vehicle-main: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-main {
+  margin-bottom: 20px;
+}
+
+/* .vehicle-main p: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-main p {
+  margin: 0 0 5px;
+
+  color: #98a2b0;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1.1px;
+}
+
+/* .vehicle-main h3: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-main h3 {
+  margin: 0;
+
+  color: #182f47;
+
+  font-size: 25px;
+
+  letter-spacing: 1px;
+}
+
+/* .vehicle-details: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-details {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 14px;
+
+  padding-top: 17px;
+
+  border-top: 1px solid #edf0f3;
+}
+
+.vehicle-details span,
+/* .vehicle-details strong: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-details strong {
+  display: block;
+}
+
+/* .vehicle-details span: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-details span {
+  margin-bottom: 3px;
+
+  color: #9ba4b1;
+
+  font-size: 9px;
+}
+
+/* .vehicle-details strong: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle-details strong {
+  color: #435469;
+
+  font-size: 11px;
+}
+
+.loading-state,
+/* .empty-state: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.empty-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+/* .loading-state: estado visual centrado para indicar que la pantalla aun esta consultando datos. */
+.loading-state {
+  color: #778493;
+}
+
+/* .loader: circulo de carga que aparece mientras se espera respuesta del Gateway o servicios. */
+.loader {
+  width: 33px;
+  height: 33px;
+
+  margin-bottom: 14px;
+
+  border: 3px solid #dce4e9;
+
+  border-top-color: #1aa99a;
+
+  border-radius: 50%;
+
+  animation: rotate 0.7s linear infinite;
+}
+
+@keyframes rotate {
+  /* to: paso final de la animacion del loader giratorio usado durante cargas HTTP. */
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* .empty-icon: estado vacio que aparece cuando aun no hay vehiculos, reservas o datos para listar. */
+.empty-icon {
+  width: 54px;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 17px;
+
+  border-radius: 15px;
+
+  background: #e7f7f4;
+
+  color: #13887b;
+
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* .empty-state h3: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.empty-state h3 {
+  margin: 0 0 8px;
+
+  color: #21374f;
+
+  font-size: 19px;
+}
+
+/* .empty-state p: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.empty-state p {
+  max-width: 360px;
+
+  margin: 0 0 22px;
+
+  color: #7e8998;
+
+  line-height: 1.55;
+
+  font-size: 13px;
+}
+
+/* Adaptacion tablet de vehiculos: dos tarjetas por fila para mantener lectura ordenada. */
+@media (max-width: 950px) {
+  .vehicles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Adaptacion movil de vehiculos: formulario y tarjetas pasan a una columna. */
+@media (max-width: 700px) {
+  .vehicles-page {
+    width: calc(100% - 28px);
+    padding-top: 30px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}

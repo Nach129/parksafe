@@ -1,0 +1,273 @@
+
+
+<app-navbar></app-navbar>
+
+<main class="dashboard">
+  <!-- Seccion de bienvenida/marca: contextualiza ParkSafe antes de las acciones del usuario. -->
+  <section class="hero">
+    <div>
+      <p class="eyebrow">PANEL PRINCIPAL</p>
+
+      <h1>Bienvenido a ParkSafe</h1>
+
+      <p class="hero-description">
+        Consulta la disponibilidad del estacionamiento y administra tus vehículos desde un solo
+        lugar.
+      </p>
+    </div>
+
+    <!-- Boton de accion: ejecuta el flujo definido en el componente TypeScript. -->
+
+    <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+    <button type="button" class="refresh-button" (click)="loadDashboard()" [disabled]="loading">
+      ↻ Actualizar
+    </button>
+  </section>
+
+  @if (errorMessage) {
+    <div class="error-box">
+      <div>
+        <strong> No fue posible cargar el sistema </strong>
+
+        <span>
+          {{ errorMessage }}
+        </span>
+      </div>
+
+      <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+      <button type="button" (click)="loadDashboard()">Reintentar</button>
+    </div>
+  }
+
+  @if (loading) {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="loading-state">
+      <div class="loader"></div>
+
+      <p>Consultando ParkSafe...</p>
+    </section>
+  } @else {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-icon">P</div>
+
+        <div>
+          <span> Espacios totales </span>
+
+          <strong>
+            {{ totalSpaces }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="stat-card available">
+        <div class="stat-icon">✓</div>
+
+        <div>
+          <span> Disponibles </span>
+
+          <strong>
+            {{ availableSpaces }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="stat-card reserved">
+        <div class="stat-icon">R</div>
+
+        <div>
+          <span> Reservados </span>
+
+          <strong>
+            {{ reservedSpaces }}
+          </strong>
+        </div>
+      </article>
+
+      <article class="stat-card occupied">
+        <div class="stat-icon">O</div>
+
+        <div>
+          <span> Ocupados </span>
+
+          <strong>
+            {{ occupiedSpaces }}
+          </strong>
+        </div>
+      </article>
+    </section>
+
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="main-grid">
+      <article class="parking-card">
+        <div class="section-heading">
+          <div>
+            <p class="section-eyebrow">DISPONIBILIDAD</p>
+
+            <h2>Estado del estacionamiento</h2>
+          </div>
+
+          <a routerLink="/estacionamiento"> Ver espacios → </a>
+        </div>
+
+        <div class="availability">
+          <div class="availability-number">
+            <strong>
+              {{ availableSpaces }}
+            </strong>
+
+            <span>
+              de {{ totalSpaces }}
+              espacios disponibles
+            </span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-bar" [style.width.%]="availabilityPercentage"></div>
+          </div>
+
+          <div class="availability-footer">
+            <span> {{ availabilityPercentage }}% disponible </span>
+
+            @if (unavailableSpaces > 0) {
+              <span>
+                {{ unavailableSpaces }}
+                fuera de servicio
+              </span>
+            }
+          </div>
+        </div>
+
+        <div class="quick-spaces">
+          @for (space of spaces; track space.id) {
+            <div
+              class="mini-space"
+              [class.available-space]="space.estado === 'DISPONIBLE'"
+              [class.reserved-space]="space.estado === 'RESERVADO'"
+              [class.occupied-space]="space.estado === 'OCUPADO'"
+              [class.disabled-space]="space.estado === 'FUERA_DE_SERVICIO'"
+            >
+              <strong>
+                {{ space.codigo }}
+              </strong>
+
+              <span>
+                {{ space.estado }}
+              </span>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="system-card">
+        <div class="section-heading">
+          <div>
+            <p class="section-eyebrow">SISTEMA DISTRIBUIDO</p>
+
+            <h2>Estado del sistema</h2>
+          </div>
+
+          <a routerLink="/estado-sistema"> Detalles → </a>
+        </div>
+
+        <div class="system-current">
+          <span> Nodo activo </span>
+
+          <strong>
+            {{ activeNode }}
+          </strong>
+
+          <small>
+            {{ activeNodeUrl }}
+          </small>
+        </div>
+
+        <div class="nodes">
+          <div class="node-row">
+            <div>
+              <span class="status-dot" [class.online]="primaryStatus === 'ACTIVE'"></span>
+
+              Nodo primario
+            </div>
+
+            <strong>
+              {{ primaryStatus }}
+            </strong>
+          </div>
+
+          <div class="node-row">
+            <div>
+              <span class="status-dot" [class.online]="backupStatus === 'ACTIVE'"></span>
+
+              Nodo respaldo
+            </div>
+
+            <strong>
+              {{ backupStatus }}
+            </strong>
+          </div>
+
+          <div class="node-row">
+            <div>
+              <span class="status-dot online"></span>
+
+              API Gateway
+            </div>
+
+            <strong> ACTIVE </strong>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="actions-section">
+      <div class="section-heading">
+        <div>
+          <p class="section-eyebrow">ACCESOS RÁPIDOS</p>
+
+          <h2>¿Qué quieres hacer?</h2>
+        </div>
+      </div>
+
+      <div class="actions-grid">
+        <a routerLink="/vehiculos" class="action-card">
+          <div class="action-icon">V</div>
+
+          <div>
+            <strong> Mis vehículos </strong>
+
+            <span> Registra y administra tus vehículos. </span>
+          </div>
+
+          <b>→</b>
+        </a>
+
+        <a routerLink="/estacionamiento" class="action-card">
+          <div class="action-icon">P</div>
+
+          <div>
+            <strong> Reservar espacio </strong>
+
+            <span> Consulta espacios y realiza una reserva. </span>
+          </div>
+
+          <b>→</b>
+        </a>
+
+        <a routerLink="/mis-reservas" class="action-card">
+          <div class="action-icon">R</div>
+
+          <div>
+            <strong> Mis reservas </strong>
+
+            <span> Revisa tus espacios asignados. </span>
+          </div>
+
+          <b>→</b>
+        </a>
+      </div>
+    </section>
+  }
+</main>

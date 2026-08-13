@@ -1,0 +1,120 @@
+
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .space-card: tarjeta que agrupa informacion relacionada para lectura rapida en parking space. */
+.space-card {
+  width: 100%;
+  min-height: 132px;
+
+  padding: 15px;
+
+  border: 2px solid transparent;
+
+  border-radius: 13px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #f1f3f6;
+
+  color: #536174;
+
+  text-align: left;
+
+  cursor: default;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+/* .space-card:disabled: estado deshabilitado que evita interaccion cuando no hay datos validos o cupos. */
+.space-card:disabled {
+  opacity: 1;
+}
+/* .space-top: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.space-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* .space-top strong: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.space-top strong {
+  font-size: 16px;
+}
+/* .status: indicador numerico usado para resumir capacidad, reservas o vehiculos. */
+.status {
+  font-size: 7px;
+  font-weight: 850;
+
+  letter-spacing: 0.5px;
+}
+/* .car-symbol: define presentacion del bloque .car-symbol dentro de la pantalla parking space. */
+.car-symbol {
+  width: 38px;
+  height: 38px;
+
+  margin: 17px auto 12px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.65);
+
+  font-size: 18px;
+  font-weight: 900;
+}
+/* .vehicle: elemento visual asociado a vehiculos, patentes o datos del auto. */
+.vehicle {
+  margin-top: auto;
+
+  font-size: 9px;
+  text-align: center;
+}
+/* .available: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.available {
+  background: #e8faf4;
+  color: #147d69;
+}
+/* .reserved: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.reserved {
+  background: #fff3d5;
+  color: #a86708;
+}
+/* .occupied: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.occupied {
+  background: #e9edf2;
+  color: #4c5c70;
+}
+/* .disabled: estado deshabilitado que evita interaccion cuando no hay datos validos o cupos. */
+.disabled {
+  background: #feecec;
+  color: #ae2e2e;
+}
+/* .selectable: define presentacion del bloque .selectable dentro de la pantalla parking space. */
+.selectable {
+  cursor: pointer;
+}
+
+/* .selectable:hover: feedback visual al pasar el cursor sobre un elemento interactivo. */
+.selectable:hover {
+  transform: translateY(-3px);
+
+  border-color: #2ab6a5;
+
+  box-shadow: 0 9px 24px rgba(29, 157, 143, 0.12);
+}

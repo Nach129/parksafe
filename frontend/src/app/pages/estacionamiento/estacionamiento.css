@@ -1,0 +1,476 @@
+
+
+/* Contenedor raiz del componente: define el alcance visual de esta pantalla Angular. */
+/* :host: controla como este componente Angular ocupa espacio dentro de la pagina padre. */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* *: aplica box-sizing uniforme para que padding y borde no deformen calculos de ancho. */
+* {
+  box-sizing: border-box;
+}
+/* .parking-page: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-page {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding: 46px 0 75px;
+}
+/* .page-header: define presentacion del bloque .page-header dentro de la pantalla estacionamiento. */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+/* .section-eyebrow: encabezado/rotulo que separa secciones y mejora lectura de estacionamiento. */
+.section-eyebrow {
+  margin: 0 0 8px;
+
+  color: #159b91;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  letter-spacing: 1.2px;
+}
+
+/* .page-header h1: define presentacion del bloque .page-header h1 dentro de la pantalla estacionamiento. */
+.page-header h1 {
+  margin: 0;
+
+  color: #172b43;
+
+  font-size: 40px;
+
+  letter-spacing: -1px;
+}
+
+/* .page-header > div > p:last-child: define presentacion del bloque .page-header > div > p:last-child dentro de la pantalla estacionamiento. */
+.page-header > div > p:last-child {
+  max-width: 650px;
+
+  margin: 10px 0 0;
+
+  color: #778292;
+
+  line-height: 1.6;
+}
+/* .refresh-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.refresh-button {
+  padding: 11px 15px;
+
+  border: 1px solid #dae1e8;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #35495f;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+/* .parking-tabs: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-tabs {
+  display: flex;
+  gap: 10px;
+
+  margin-bottom: 22px;
+
+  overflow-x: auto;
+}
+/* .parking-tab: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-tab {
+  min-width: 220px;
+
+  padding: 14px 17px;
+
+  border: 1px solid #dde3e9;
+
+  border-radius: 11px;
+
+  background: white;
+
+  color: #667386;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.parking-tab strong,
+/* .parking-tab span: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-tab span {
+  display: block;
+}
+
+/* .parking-tab strong: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-tab strong {
+  margin-bottom: 4px;
+
+  color: #243a52;
+
+  font-size: 13px;
+}
+
+/* .parking-tab span: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-tab span {
+  font-size: 10px;
+}
+
+/* .parking-tab.active: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.parking-tab.active {
+  border-color: #32b7a6;
+
+  background: #eaf9f6;
+}
+/* .content-grid: grilla que ordena elementos repetidos de estacionamiento, como tarjetas, espacios o datos. */
+.content-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.8fr)
+    340px;
+
+  gap: 22px;
+}
+
+.map-card,
+/* .reservation-card: tarjeta que agrupa informacion relacionada para lectura rapida en estacionamiento. */
+.reservation-card {
+  padding: 26px;
+
+  border: 1px solid #e0e5eb;
+
+  border-radius: 16px;
+
+  background: white;
+}
+/* .card-heading: tarjeta que agrupa informacion relacionada para lectura rapida en estacionamiento. */
+.card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.card-heading h2,
+/* .reservation-card h2: tarjeta que agrupa informacion relacionada para lectura rapida en estacionamiento. */
+.reservation-card h2 {
+  margin: 0;
+
+  color: #1d324a;
+
+  font-size: 21px;
+}
+/* .legend: define presentacion del bloque .legend dentro de la pantalla estacionamiento. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* .legend span: define presentacion del bloque .legend span dentro de la pantalla estacionamiento. */
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: #7d8897;
+
+  font-size: 9px;
+}
+
+/* .legend i: define presentacion del bloque .legend i dentro de la pantalla estacionamiento. */
+.legend i {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+/* .available-dot: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.available-dot {
+  background: #30b994;
+}
+
+/* .reserved-dot: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.reserved-dot {
+  background: #e6b545;
+}
+
+/* .occupied-dot: representa un cupo y su estado de disponibilidad/reserva/ocupacion. */
+.occupied-dot {
+  background: #78889b;
+}
+
+/* .spaces-grid: grilla que ordena elementos repetidos de estacionamiento, como tarjetas, espacios o datos. */
+.spaces-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  gap: 11px;
+}
+
+/* .reservation-description: define presentacion del bloque .reservation-description dentro de la pantalla estacionamiento. */
+.reservation-description {
+  margin: 10px 0 22px;
+
+  color: #7b8796;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* .selected-parking: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.selected-parking {
+  padding: 16px;
+
+  margin-bottom: 20px;
+
+  border-radius: 11px;
+
+  background: #f6f8fa;
+}
+
+.selected-parking span,
+.selected-parking strong,
+/* .selected-parking small: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.selected-parking small {
+  display: block;
+}
+
+/* .selected-parking span: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.selected-parking span {
+  margin-bottom: 4px;
+
+  color: #98a2ae;
+
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* .selected-parking strong: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.selected-parking strong {
+  color: #223951;
+
+  font-size: 14px;
+}
+
+/* .selected-parking small: elemento visual asociado al estacionamiento seleccionado o sus cupos. */
+.selected-parking small {
+  margin-top: 5px;
+
+  color: #15927f;
+
+  font-size: 10px;
+}
+
+/* .form-group: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* .form-group label: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #405268;
+
+  font-size: 12px;
+  font-weight: 750;
+}
+
+/* .form-group select: parte del formulario que captura datos antes de enviarlos como JSON. */
+.form-group select {
+  width: 100%;
+
+  padding: 12px;
+
+  border: 1px solid #d7dee6;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #263a51;
+
+  outline: none;
+}
+
+/* .reserve-button: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.reserve-button {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: #17344f;
+  color: white;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+/* .reserve-button:hover:not(:disabled): boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.reserve-button:hover:not(:disabled) {
+  background: #214866;
+}
+
+/* .reserve-button:disabled: boton de accion; sus estilos comunican si se puede guardar, refrescar, reservar o salir. */
+.reserve-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* .info-box: define presentacion del bloque .info-box dentro de la pantalla estacionamiento. */
+.info-box {
+  margin-top: 18px;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  background: #eef8f6;
+
+  color: #267566;
+}
+
+.info-box strong,
+/* .info-box span: define presentacion del bloque .info-box span dentro de la pantalla estacionamiento. */
+.info-box span {
+  display: block;
+}
+
+/* .info-box strong: define presentacion del bloque .info-box strong dentro de la pantalla estacionamiento. */
+.info-box strong {
+  margin-bottom: 5px;
+
+  font-size: 11px;
+}
+
+/* .info-box span: define presentacion del bloque .info-box span dentro de la pantalla estacionamiento. */
+.info-box span {
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+/* .message: contenedor comun para feedback textual de la pantalla estacionamiento. */
+.message {
+  margin-bottom: 20px;
+  padding: 14px 17px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+/* .success-message: mensaje de confirmacion despues de login, registro, vehiculo o reserva exitosa. */
+.success-message {
+  border: 1px solid #bce9db;
+
+  background: #eaf9f4;
+
+  color: #15745f;
+}
+
+/* .error-message: mensaje de error mostrado cuando validaciones o backend rechazan la operacion. */
+.error-message {
+  border: 1px solid #fecaca;
+
+  background: #fff2f2;
+
+  color: #a72d2d;
+}
+
+/* .loading-state: estado visual centrado para indicar que la pantalla aun esta consultando datos. */
+.loading-state {
+  min-height: 380px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #768292;
+}
+
+/* .loader: circulo de carga que aparece mientras se espera respuesta del Gateway o servicios. */
+.loader {
+  width: 34px;
+  height: 34px;
+
+  margin-bottom: 14px;
+
+  border: 3px solid #dce4e9;
+
+  border-top-color: #1aa99a;
+
+  border-radius: 50%;
+
+  animation: rotate 0.7s linear infinite;
+}
+
+@keyframes rotate {
+  /* to: paso final de la animacion del loader giratorio usado durante cargas HTTP. */
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Adaptacion responsiva de la pantalla de estacionamiento: reduce columnas cuando baja el ancho. */
+@media (max-width: 1000px) {
+  /* .content-grid: grilla que ordena elementos repetidos de estacionamiento, como tarjetas, espacios o datos. */
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* .spaces-grid: grilla que ordena elementos repetidos de estacionamiento, como tarjetas, espacios o datos. */
+  .spaces-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Adaptacion movil: prioriza lectura vertical y cupos grandes para tocar con el dedo. */
+@media (max-width: 700px) {
+  .parking-page {
+    width: calc(100% - 28px);
+    padding-top: 30px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .spaces-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-heading {
+    flex-direction: column;
+  }
+}

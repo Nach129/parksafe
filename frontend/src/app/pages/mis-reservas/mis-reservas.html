@@ -1,0 +1,168 @@
+
+
+<app-navbar></app-navbar>
+
+<main class="reservations-page">
+  <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">MIS RESERVAS</p>
+
+      <h1>Tus espacios reservados</h1>
+
+      <p>Consulta las reservas realizadas y revisa qué nodo del sistema procesó cada operación.</p>
+    </div>
+
+    <!-- Boton de accion: ejecuta el flujo definido en el componente TypeScript. -->
+
+    <!-- Boton de accion: ejecuta el metodo enlazado en el componente TypeScript. -->
+    <button type="button" class="refresh-button" (click)="loadReservations()" [disabled]="loading">
+      ↻ Actualizar
+    </button>
+  </section>
+
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (loading) {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="loading-state">
+      <div class="loader"></div>
+
+      <p>Cargando reservas...</p>
+    </section>
+  } @else {
+    <!-- Seccion de contenido: agrupa una parte funcional de la pantalla actual. -->
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span> Reservas totales </span>
+
+        <strong>
+          {{ totalReservations }}
+        </strong>
+      </article>
+
+      <article class="stat-card">
+        <span> Activas </span>
+
+        <strong>
+          {{ activeReservations.length }}
+        </strong>
+      </article>
+
+      <article class="stat-card">
+        <span> Procesadas por primario </span>
+
+        <strong>
+          {{ processedByPrimary }}
+        </strong>
+      </article>
+
+      <article class="stat-card">
+        <span> Procesadas por respaldo </span>
+
+        <strong>
+          {{ processedByBackup }}
+        </strong>
+      </article>
+    </section>
+
+    <!-- Seccion de reservas: muestra o permite operar movimientos de estacionamiento. -->
+    <section class="reservations-section">
+      <div class="section-header">
+        <div>
+          <p class="section-eyebrow">HISTORIAL</p>
+
+          <h2>Reservas registradas</h2>
+        </div>
+      </div>
+
+      @if (reservations.length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">R</div>
+
+          <h3>No tienes reservas</h3>
+
+          <p>Cuando reserves un espacio, aparecerá aquí.</p>
+        </div>
+      } @else {
+        <div class="reservations-grid">
+          @for (reservation of reservations; track reservation.id) {
+            <article class="reservation-card">
+              <div class="card-header">
+                <div>
+                  <p class="reservation-code">
+                    {{ reservation.code }}
+                  </p>
+
+                  <h3>
+                    {{ reservation.space.code }}
+                  </h3>
+                </div>
+
+                <span class="status-badge" [class.active]="reservation.status === 'ACTIVO'">
+                  {{ reservation.status }}
+                </span>
+              </div>
+
+              <div class="parking-name">
+                <span> Estacionamiento </span>
+
+                <strong>
+                  {{ reservation.parkingName }}
+                </strong>
+              </div>
+
+              <div class="details-grid">
+                <div>
+                  <span> Vehículo </span>
+
+                  <strong>
+                    {{ getVehicle(reservation.vehicleId)?.patente || '#' + reservation.vehicleId }}
+                  </strong>
+                </div>
+
+                <div>
+                  <span> Marca / Modelo </span>
+
+                  <strong>
+                    {{ getVehicle(reservation.vehicleId)?.marca || 'Sin especificar' }}
+
+                    {{ getVehicle(reservation.vehicleId)?.modelo || '' }}
+                  </strong>
+                </div>
+
+                <div>
+                  <span> Tipo </span>
+
+                  <strong>
+                    {{ reservation.type }}
+                  </strong>
+                </div>
+
+                <div>
+                  <span> Procesado por </span>
+
+                  <strong [class.backup-node]="reservation.processedBy === 'RESPALDO'">
+                    {{ reservation.processedBy }}
+                  </strong>
+                </div>
+              </div>
+
+              <div class="operation">
+                <span> Operation ID </span>
+
+                <code>
+                  {{ reservation.operationId }}
+                </code>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </section>
+  }
+</main>
